@@ -1,7 +1,7 @@
 namespace :create_pets do
   desc 'Create pets'
   task create: :environment do
-    1000.times do
+    10_000.times do
       pet_params = []
       pet_params_integer = []
       time = Time.now
