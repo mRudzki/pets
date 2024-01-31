@@ -8,7 +8,6 @@ class BenchmarkTime
   end
 
   def call
-    # ActiveRecord::Base.logger = Logger.new(STDOUT)
     count_times
     find_by_name_times
     find_by_id_times
@@ -64,8 +63,7 @@ class BenchmarkTime
     time = 0
     NUM_OF_TRIES.times do
       time += Benchmark.realtime do
-        variable = klass_name.safe_constantize.public_send(random_pet.kind).where(name: random_pet.name)
-        variable.first
+        klass_name.safe_constantize.public_send(random_pet.kind).where(name: random_pet.name).load
       end
       Rails.cache.clear
     end
