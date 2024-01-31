@@ -64,8 +64,7 @@ class BenchmarkTime
     time = 0
     NUM_OF_TRIES.times do
       time += Benchmark.realtime do
-        variable = klass_name.safe_constantize.public_send(random_pet.kind).where(name: random_pet.name)
-        variable.first
+        variable = klass_name.safe_constantize.public_send(random_pet.kind).where(name: random_pet.name).load
       end
       Rails.cache.clear
     end
